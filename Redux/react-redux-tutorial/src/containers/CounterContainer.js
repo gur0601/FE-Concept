@@ -7,19 +7,29 @@ const CounterContainer = ({ number, increase, decrease }) => {
     return<Counter number={number} onIncrease={increase} onDecrease={decrease}/>;
 };
 
-const mapStateToProps = state => ({
-    number : state.counter.number,
-});
-const mapDispatchToProps = dispatch => ({
-    //임시함수
-    increase: () => {
-dispatch(increase());
-    },
-    decrease: () => {
-dispatch(decrease());
-    },
-});
+// const mapStateToProps = state => ({
+//     number : state.counter.number,
+// });
+// const mapDispatchToProps = dispatch => ({
+//     //임시함수
+//     increase: () => {
+// dispatch(increase());
+//     },
+//     decrease: () => {
+// dispatch(decrease());
+//     },
+// });
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps,
+// )(CounterContainer);
+
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(CounterContainer);
+    state => ({
+        number: state.counter.number,
+    }),
+    dispatch => ({
+        increase: () => dispatch(increase()),
+        decrease: () => dispatch(decrease()),
+    }),
+)(CounterContainer)
